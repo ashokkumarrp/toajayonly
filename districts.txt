@@ -1,0 +1,42 @@
+animals
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            $("#animals").change(function(){
+                       $("#type").empty();
+                       $("#type").append("<option value=''>select type </option>");
+
+                     var animals = $(this).val();
+                     $.ajax({
+                     type : "POST",
+                     url : "http://localhost/cgi-bin/login2.py",
+                     data : {animals : animals},
+                     success : function(result){
+                        $("#type").append(result);
+                     }
+                 });
+          });
+        });
+    </script>
+
+</head>
+<body>
+<select name="animals" id="animals">
+ <option value="">select type</option>
+ <option value="wild">wild animals</option>
+ <option value="pet">pet animals</option>
+</select>
+<select name="type" id="type">
+  <option value="">select type</option>
+</select>
+</body>
+</html>
